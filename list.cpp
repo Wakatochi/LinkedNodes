@@ -16,10 +16,7 @@ List::List(int value)
 
 List::~List()
 {
-   if(m_first != nullptr)
-   {
-      delete m_first;
-   }
+   deleteAll();
 }
 
 bool
@@ -138,5 +135,15 @@ List::traverse(int value)
 void
 List::deleteAll()
 {
+   if(m_first != nullptr)
+   {
+      while(m_first->getNext() != nullptr)
+      {
+         Node* del = m_first;
+         m_first = del->getNext();
+         delete del;
+      }
 
+      delete m_first;
+   }
 }

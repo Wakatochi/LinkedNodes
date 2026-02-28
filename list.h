@@ -28,10 +28,9 @@ class List
       Node* traverse(int value);
 
       /// <summary>
-      /// Remove all nodes
+      /// Remove all nodes.
       /// </summary>
       void deleteAll();
-
 };
 
 #endif
