@@ -4,6 +4,7 @@
 
 List::List()
  : m_first(nullptr)
+ , m_last(nullptr)
 {
 
 }
@@ -12,6 +13,7 @@ List::List(int value)
 {
    Node* node = new Node(value);
    m_first = node;
+   m_last = node;
 }
 
 List::~List()
@@ -33,6 +35,7 @@ List::add(int value)
    {
       // First node
       m_first = node;
+      m_last = node;
    }
    else if(value <= m_first->getValue())
    {
@@ -42,9 +45,22 @@ List::add(int value)
    }
    else
    {
-      // Search
+      // Middle to last
       Node* predptr = traverse(value);
+
+      node->setPrev(predptr);
       node->setNext(predptr->getNext());
+
+      if(node->getNext() != nullptr)
+      {
+         // New node is between first and last.
+         predptr->getNext()->setPrev(node);
+      }
+      else
+      {
+         // New node is last
+         m_last = node;
+      }
 
       predptr->setNext(node);
    }
@@ -59,16 +75,18 @@ List::remove(int value)
    {
       ptr = m_first;
       m_first = ptr->getNext();
+      m_first->setPrev(nullptr);
 
       delete ptr;
    }
    else
    {
       Node* predptr = traverse(value);
+      ptr = predptr->getNext(); // Point out the node.
 
-      ptr = predptr->getNext();
-      predptr->setNext(ptr->getNext());
-
+      ptr->getNext()->setPrev(ptr->getPrev());
+      ptr->getPrev()->setNext(ptr->getNext());
+      
       delete ptr;
    }
 }
