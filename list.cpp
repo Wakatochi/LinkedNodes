@@ -28,36 +28,24 @@ List::empty()
    return m_first == nullptr;
 }
 
-Node*
-List::traverse(int value)
-{
-   Node* ptr = m_first;
-   while(ptr->getNext() != nullptr && ptr->getValue() < value)
-   {
-      if(value >= ptr->getNext()->getValue())
-      {
-         ptr = ptr->getNext();
-      }
-      else
-      {
-         return ptr;
-      }
-   }
-
-   // Last
-   return ptr;
-}
-
 void
 List::add(int value)
 {
    Node* node = new Node(value);
    if(m_first == nullptr)
    {
+      // First node
+      m_first = node;
+   }
+   else if(value <= m_first->getValue())
+   {
+      // Put first
+      node->setNext(m_first);
       m_first = node;
    }
    else
    {
+      // Search
       Node* predptr = traverse(value);
       node->setNext(predptr->getNext());
 
@@ -66,9 +54,26 @@ List::add(int value)
 }
 
 void
-List::remove()
+List::remove(int value)
 {
+   Node* ptr;
 
+   if(value == m_first->getValue())
+   {
+      ptr = m_first;
+      m_first = ptr->getNext();
+
+      delete ptr;
+   }
+   else
+   {
+      Node* predptr = traverse(value);
+
+      ptr = predptr->getNext();
+      predptr->setNext(ptr->getNext());
+
+      delete ptr;
+   }
 }
 
 int
@@ -89,7 +94,17 @@ List::size()
 void
 List::dump()
 {
-   std::cout << "Size: " << size() << std::endl;
+   std::cout << "Empty: ";
+   if(empty())
+   {
+      std::cout << "YES";
+   }
+   else
+   {
+      std::cout << "NO";
+   }
+
+   std::cout << std::endl << "Size: " << size() << std::endl;
    Node* ptr = m_first;
 
    while(ptr != nullptr)
@@ -98,4 +113,30 @@ List::dump()
       ptr = ptr->getNext();
    }
    std::cout << std::endl;
+}
+
+Node*
+List::traverse(int value)
+{
+   Node* ptr = m_first;
+   while(ptr->getNext() != nullptr && ptr->getNext()->getValue() < value)
+   {
+      if(value >= ptr->getNext()->getValue())
+      {
+         ptr = ptr->getNext();
+      }
+      else
+      {
+         return ptr;
+      }
+   }
+
+   // Last
+   return ptr;
+}
+
+void
+List::deleteAll()
+{
+
 }

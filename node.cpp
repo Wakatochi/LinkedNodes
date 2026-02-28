@@ -16,15 +16,8 @@ Node::Node(int value)
 
 Node::~Node()
 {
-   if(m_prev != nullptr)
-   {
-      delete m_prev;
-   }
-
-   if(m_next != nullptr)
-   {
-      delete m_next;
-   }
+   m_prev = nullptr;
+   m_next = nullptr;
 }
 
 int
