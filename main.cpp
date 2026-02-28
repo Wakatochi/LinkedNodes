@@ -1,6 +1,5 @@
 // --- Memory Leak detection --- //
 #define _CRTDBG_MAP_ALLOC //to get more details
-#include <stdlib.h>  
 #include <crtdbg.h>   //for malloc and free
 // ------------------------------//
 

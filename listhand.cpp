@@ -1,4 +1,5 @@
 #include "listhand.h"
+#include "list.h"
 
 #include <iostream>
 #include <cstdlib>

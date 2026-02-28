@@ -1,10 +1,12 @@
 #include "list.h"
+#include "node.h"
 
 #include <iostream>
 #include <iomanip>
 #include <string>
 #include <vector>
 #include <sstream>
+#include <ios>
 
 List::List()
  : m_first(nullptr)
