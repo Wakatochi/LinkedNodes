@@ -1,6 +1,10 @@
 #ifndef NODE_H
 #define NODE_H
 
+/// <summary>
+/// Node class, self-referential.
+/// Contains Data and pointers to next and previous.
+/// </summary>
 class Node
 {
    public:
