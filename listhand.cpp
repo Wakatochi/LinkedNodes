@@ -42,6 +42,10 @@ ListHand::run()
             remove();
             break;
 
+         case Operation::VISUALIZE:
+            visualize();
+            break;
+
          case Operation::QUIT:
             run = false;
             break;
@@ -59,7 +63,8 @@ ListHand::printMenu()
    cout << " [0] Print" << endl;
    cout << " [1] Add" << endl;
    cout << " [2] Remove" << endl;
-   cout << " [3] Quit" << endl;
+   cout << " [3] Visualize" << endl;
+   cout << " [4] Quit" << endl;
    cout << "#### #### ####" << endl;
    std::cout << "Enter value: ";
 }
@@ -100,6 +105,19 @@ ListHand::printList()
 
    m_list->dump();
 
+   std::cout << std::endl << "Press any key to continue" << std::endl;
+   std::cin >> val;
+   std::cout.flush();
+}
+
+void
+ListHand::visualize()
+{
+   int val;
+   system("cls");
+      
+   m_list->visualize();
+   
    std::cout << std::endl << "Press any key to continue" << std::endl;
    std::cin >> val;
    std::cout.flush();

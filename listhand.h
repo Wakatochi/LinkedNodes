@@ -20,6 +20,7 @@ class ListHand
          PRINT,
          ADD,
          REMOVE,
+         VISUALIZE,
          QUIT,
       };
 
@@ -28,6 +29,7 @@ class ListHand
       void add();
       void remove();
       void printList();
+      void visualize();
 };
 
 #endif

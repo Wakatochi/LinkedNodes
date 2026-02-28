@@ -16,6 +16,10 @@ class List
       int size();
 
       void dump();
+      /// <summary>
+      /// Print each node with its pointer addresses and links.
+      /// </summary>
+      void visualize();
 
    private:
       Node* m_first;

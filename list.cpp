@@ -1,6 +1,10 @@
 #include "list.h"
 
 #include <iostream>
+#include <iomanip>
+#include <string>
+#include <vector>
+#include <sstream>
 
 List::List()
  : m_first(nullptr)
@@ -128,6 +132,83 @@ List::dump()
       ptr = ptr->getNext();
    }
    std::cout << std::endl;
+}
+
+void
+List::visualize()
+{
+   // Collect nodes first
+   std::vector<Node*> nodes;
+   Node* cur = m_first;
+   while(cur != nullptr)
+   {
+      nodes.push_back(cur);
+      cur = cur->getNext();
+   }
+
+   if(nodes.empty())
+   {
+      std::cout << "List empty" << std::endl;
+      return;
+   }
+
+   const int boxWidth = 8;
+   const std::string sep = "+" + std::string(boxWidth, '-') + "+";
+   const std::string spacer = "    "; // space between node columns
+
+   std::string sepLine;
+   std::string prevLine;
+   std::string valLine;
+   std::string nextLine;
+
+   for(size_t i = 0; i < nodes.size(); ++i)
+   {
+      std::string prevVal = nodes[i]->getPrev() ? std::to_string(nodes[i]->getPrev()->getValue()) : "NULL";
+      std::string val = std::to_string(nodes[i]->getValue());
+      std::string nextVal = nodes[i]->getNext() ? std::to_string(nodes[i]->getNext()->getValue()) : "NULL";
+
+      // separator blocks
+      sepLine += sep;
+      if(i + 1 < nodes.size()) sepLine += spacer;
+
+      // prev box
+      std::ostringstream tp;
+      tp << "|p:" << std::left << std::setw(boxWidth - 2) << prevVal << "|";
+      prevLine += tp.str();
+      if(i + 1 < nodes.size())
+      {
+         // if next node's prev points to this node, show left arrow between boxes
+         if(nodes[i + 1]->getPrev() == nodes[i]) prevLine += " <- "; else prevLine += "    ";
+      }
+
+      // value box
+      std::ostringstream vm;
+      vm << "|v:" << std::left << std::setw(boxWidth - 2) << val << "|";
+      valLine += vm.str();
+      if(i + 1 < nodes.size())
+      {
+         // remove middle arrow: just add spacer between value boxes
+         valLine += spacer;
+      }
+
+      // next box
+      std::ostringstream nt;
+      nt << "|n:" << std::left << std::setw(boxWidth - 2) << nextVal << "|";
+      nextLine += nt.str();
+      if(i + 1 < nodes.size())
+      {
+         if(nodes[i]->getNext() == nodes[i + 1]) nextLine += " -> "; else nextLine += spacer;
+      }
+   }
+
+   // Print assembled lines
+   std::cout << sepLine << std::endl;
+   std::cout << prevLine << std::endl;
+   std::cout << sepLine << std::endl;
+   std::cout << valLine << std::endl;
+   std::cout << sepLine << std::endl;
+   std::cout << nextLine << std::endl;
+   std::cout << sepLine << std::endl;
 }
 
 Node*
