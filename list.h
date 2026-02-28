@@ -11,15 +11,27 @@ class List
       ~List();
 
       bool empty();
-      Node* traverse(int value);
       void add(int value);
-      void remove();
+      void remove(int value);
       int size();
 
       void dump();
 
    private:
       Node* m_first;
+
+      /// <summary>
+      /// Search the list for the node with the desired value.
+      /// </summary>
+      /// <param name="value">Node value</param>
+      /// <returns>The predecessor node</returns>
+      Node* traverse(int value);
+
+      /// <summary>
+      /// Remove all nodes
+      /// </summary>
+      void deleteAll();
+
 };
 
 #endif

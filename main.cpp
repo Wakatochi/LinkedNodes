@@ -4,22 +4,17 @@
 #include <crtdbg.h>   //for malloc and free
 // ------------------------------//
 
-#include "list.h"
+#include "listhand.h"
 
 int main()
 {
    // Calls "_CrtDumpMemoryLeaks" at exit point
    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-   List list(9);
+   ListHand* list = new ListHand();
+   list->run();
 
-   list.add(17);
-   list.add(26);
-   list.add(22);
-   list.add(20);
-   list.add(34);
-
-   list.dump();
+   delete list;
 
    return 0;
 }
