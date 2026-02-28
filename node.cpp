@@ -20,16 +20,27 @@ Node::~Node()
    m_next = nullptr;
 }
 
-int
-Node::getValue() const
+void
+Node::setValue(int value)
 {
-   return m_value;
+   value = value;
 }
 
 void
 Node::setNext(Node* node)
 {
    m_next = node;
+}
+
+void Node::setPrev(Node* node)
+{
+   m_prev = node;
+}
+
+int
+Node::getValue() const
+{
+   return m_value;
 }
 
 Node*
@@ -42,10 +53,4 @@ Node*
 Node::getPrev()
 {
    return m_prev;
-}
-
-void
-Node::setValue(int value)
-{
-   value = value;
 }

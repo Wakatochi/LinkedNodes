@@ -12,13 +12,13 @@ class Node
       Node(int value);
       ~Node();
 
-      int getValue() const;
-
+      void setValue(int value);
       void setNext(Node* node);
+      void setPrev(Node* node);
+
+      int getValue() const;
       Node* getNext();
       Node* getPrev();
-
-      void setValue(int value);
 
    private:
       Node* m_prev;

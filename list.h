@@ -19,6 +19,7 @@ class List
 
    private:
       Node* m_first;
+      Node* m_last;
 
       /// <summary>
       /// Search the list for the node with the desired value.
