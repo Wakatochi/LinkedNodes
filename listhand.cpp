@@ -93,7 +93,15 @@ ListHand::remove()
    std::cout << "Enter value: ";
    std::cin >> val;
 
-   m_list->remove(val);
+   bool removed = m_list->remove(val);
+   if(!removed)
+   {
+      std::cout << std::endl << "No node with value " << val << " found." << std::endl;
+     
+      std::cout << std::endl << "Press any key to continue" << std::endl;
+      std::cin >> val;
+      std::cout.flush();
+   }
 }
 
 void

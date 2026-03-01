@@ -12,7 +12,7 @@ class List
 
       bool empty();
       void add(int value);
-      void remove(int value);
+      bool remove(int value);
       int size();
 
       void dump();
